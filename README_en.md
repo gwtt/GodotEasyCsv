@@ -1,4 +1,7 @@
 # GodotEasyCsv
+
+[中文](README.md)
+
 A lightweight Godot CSV management plugin with visual editing, based on Godot 4.4.1.
 Since I couldn't find any visual CSV editor plugins for Godot on GitHub (the only available one was for version 3.3), I spent half a day developing this plugin. If you know of a better alternative, feel free to submit an issue.
 
