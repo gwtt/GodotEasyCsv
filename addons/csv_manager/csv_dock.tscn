@@ -1,0 +1,159 @@
+[gd_scene load_steps=4 format=3 uid="uid://bibdunmsfq17v"]
+
+[ext_resource type="Script" uid="uid://btvesvlpbfmf2" path="res://addons/csv_manager/csv_dock.gd" id="1_csv_dock"]
+[ext_resource type="Texture2D" uid="uid://dpvo8r8xwvjtm" path="res://addons/csv_manager/icons/csv_icon.svg" id="2_hloo4"]
+
+[sub_resource type="ImageTexture" id="csv_icon_tex"]
+
+[node name="CSVDock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_csv_dock")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "CSV Manager"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OpenButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Open"
+icon = SubResource("csv_icon_tex")
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="SaveAsButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save As"
+
+[node name="NewButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New"
+
+[node name="EditHeadersButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Headers"
+
+[node name="DeleteRowButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Delete Row"
+
+[node name="DeleteColumnButton" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Delete Column"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = -500
+
+[node name="FileBrowser" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FileListLabel" type="Label" parent="VBoxContainer/HSplitContainer/FileBrowser"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "CSV Files in Project"
+
+[node name="FileList" type="ItemList" parent="VBoxContainer/HSplitContainer/FileBrowser"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 2
+item_0/text = "/addons/csv_manager/test_csv/test_csv.txt"
+item_0/icon = ExtResource("2_hloo4")
+item_1/text = "/New CSV.csv.txt"
+item_1/icon = ExtResource("2_hloo4")
+
+[node name="RefreshButton" type="Button" parent="VBoxContainer/HSplitContainer/FileBrowser"]
+layout_mode = 2
+text = "Refresh"
+
+[node name="DeleteButton" type="Button" parent="VBoxContainer/HSplitContainer/FileBrowser"]
+layout_mode = 2
+text = "Delete"
+
+[node name="MainPanel" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InfoBar" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/MainPanel"]
+layout_mode = 2
+
+[node name="TableName" type="Label" parent="VBoxContainer/HSplitContainer/MainPanel/InfoBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "No CSV loaded"
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/HSplitContainer/MainPanel/InfoBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DimensionsLabel" type="Label" parent="VBoxContainer/HSplitContainer/MainPanel/InfoBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "0x0"
+
+[node name="DelimiterLabel" type="Label" parent="VBoxContainer/HSplitContainer/MainPanel/InfoBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Delimiter: ,"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/MainPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="TableContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/MainPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TableGrid" type="GridContainer" parent="VBoxContainer/HSplitContainer/MainPanel/ScrollContainer/TableContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/StatusBar"]
+layout_mode = 2
+text = "Ready"
+
+[connection signal="item_selected" from="VBoxContainer/HSplitContainer/FileBrowser/FileList" to="." method="_on_file_selected"]
+[connection signal="pressed" from="VBoxContainer/HSplitContainer/FileBrowser/RefreshButton" to="." method="_on_refresh_pressed"]
+[connection signal="pressed" from="VBoxContainer/HSplitContainer/FileBrowser/DeleteButton" to="." method="_on_delete_button_pressed"]
