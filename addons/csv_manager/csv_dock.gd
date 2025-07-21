@@ -330,28 +330,29 @@ func _unhandled_key_input(event: InputEvent):
 	# 键盘快捷键支持
 	if event is InputEventKey and event.pressed:
 		if event.ctrl_pressed:
-			match event.keycode:
-				KEY_R:
-					# Ctrl+R 删除当前行
-					var focused_row = _get_focused_row()
-					if focused_row != -1:
-						_delete_row_with_confirmation(focused_row)
+			if event.shift_pressed:
+				match event.keycode:
+					KEY_1:
+						# Ctrl+Shift+1 删除当前行
+						var focused_row = _get_focused_row()
+						if focused_row != -1:
+							_delete_row_with_confirmation(focused_row)
+							accept_event()
+					KEY_2:
+						# Ctrl+Shift+2 删除当前列
+						var focused_col = _get_focused_column()
+						if focused_col != -1:
+							_delete_column_with_confirmation(focused_col)
+							accept_event()
+					KEY_3:
+						# Ctrl+Shift+3 全选
+						if Input.is_key_pressed(KEY_CTRL):
+							_select_all_cells()
+							accept_event()
+					KEY_4:
+						# Ctrl+Shift+4 取消选择
+						_clear_selection()
 						accept_event()
-				KEY_C:
-					# Ctrl+C 删除当前列
-					var focused_col = _get_focused_column()
-					if focused_col != -1:
-						_delete_column_with_confirmation(focused_col)
-						accept_event()
-				KEY_A:
-					# Ctrl+A 全选
-					if Input.is_key_pressed(KEY_CTRL):
-						_select_all_cells()
-						accept_event()
-				KEY_D:
-					# Ctrl+D 取消选择
-					_clear_selection()
-					accept_event()
 
 func _on_cell_gui_input(event: InputEvent, cell: LineEdit):
 	if event is InputEventMouseButton:
