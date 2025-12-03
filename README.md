@@ -1,6 +1,6 @@
 # GodotEasyCsv
 
-[English](README.en.md)
+[English](README_en.md)
 
 基于Godot4.4.1版本的一个小巧的Godot可视化csv管理插件。
 因为我在github上搜索相关可视化godot编辑器没有，唯一一个还是3.3版本的，所以我花费半天做了个这个插件。有更好的，也欢迎issues补充。
